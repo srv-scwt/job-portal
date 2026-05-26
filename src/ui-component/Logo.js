@@ -1,46 +1,97 @@
-// material-ui
-import { useTheme } from '@mui/material/styles';
+import { Box, Typography } from '@mui/material';
+import { alpha, useTheme } from '@mui/material/styles';
 
-/**
- * if you want to use image instead of <svg> uncomment following.
- *
- * import logoDark from 'assets/images/logo-dark.svg';
- * import logo from 'assets/images/logo.svg';
- *
- */
-
-// ==============================|| LOGO SVG ||============================== //
+// ==============================|| LOGO ||============================== //
 
 const Logo = () => {
     const theme = useTheme();
-    const wordmarkColor = theme.palette.mode === 'dark' ? theme.palette.common.white : theme.palette.grey[900];
+    const isDark = theme.palette.mode === 'dark';
+
+    const textPrimary = isDark ? theme.palette.common.white : theme.palette.grey[900];
+    const textSecondary = isDark ? alpha(theme.palette.common.white, 0.64) : alpha(theme.palette.grey[900], 0.54);
+    const badgeBackground = isDark
+        ? `linear-gradient(145deg, ${alpha(theme.palette.secondary.main, 0.24)} 0%, ${alpha(theme.palette.background.paper, 0.92)} 100%)`
+        : `linear-gradient(145deg, ${alpha(theme.palette.secondary.main, 0.12)} 0%, ${alpha(theme.palette.common.white, 0.98)} 100%)`;
 
     return (
-        /**
-         * if you want to use image instead of svg uncomment following, and comment out <svg> element.
-         *
-         * <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Berry" width="100" />
-         *
-         */
-
-        <svg width="177" height="37" viewBox="0 0 177 37" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="job-portal-logo-title">
-            <title id="job-portal-logo-title">Job Portal</title>
-            <path
-                d="M31.7914 26.412C33.2037 23.982 33.9243 21.2048 33.9243 18.1384C33.9243 14.9273 33.1461 12.0633 31.5896 9.54652L34.5007 6.62471C35.9995 5.1204 35.9995 2.63252 34.5007 1.09929C33.002 -0.405006 30.5232 -0.405006 28.9956 1.09929L26.0845 4.02111C23.6058 2.45895 20.6947 1.67787 17.4954 1.67787C14.4978 1.67787 11.7596 2.40109 9.30972 3.81861L6.62921 1.12822C5.10161 -0.376077 2.68051 -0.376077 1.12408 1.12822C-0.374695 2.63252 -0.374695 5.1204 1.12408 6.65363L3.60283 9.14152C1.93112 11.7451 1.06644 14.7537 1.06644 18.1384C1.06644 21.5231 1.84465 24.2134 3.45872 26.7592L1.12408 29.1024C-0.374695 30.6067 -0.374695 33.0657 1.12408 34.6278C1.9023 35.3511 2.88227 35.785 3.86224 35.785C4.89985 35.785 5.87982 35.38 6.60039 34.6278L8.99267 32.2267C11.4714 33.7889 14.3249 34.5121 17.4954 34.5121C20.8676 34.5121 23.8075 33.6732 26.4016 32.0242L28.9956 34.6278C29.7738 35.3511 30.7538 35.785 31.7338 35.785C32.7137 35.785 33.6937 35.38 34.4719 34.6278C35.9707 33.0657 35.9707 30.6357 34.4719 29.1024L31.7914 26.412ZM24.384 25.1392C23.4905 26.036 22.5681 26.6435 21.5305 27.1063C20.3488 27.6849 18.9941 27.9453 17.4954 27.9453C16.1983 27.9453 14.959 27.7428 13.8637 27.3088C12.682 26.846 11.5867 26.1228 10.6067 25.1392C9.62677 24.1556 8.90621 22.9984 8.44504 21.7545C8.04152 20.6552 7.81094 19.4113 7.81094 18.1095C7.81094 16.6052 8.07035 15.2455 8.53151 14.0594C9.05032 12.9023 9.71324 11.9187 10.6067 11.0508C11.702 9.95152 12.8837 9.17044 14.296 8.8233C15.276 8.41829 16.3713 8.24472 17.4954 8.24472C18.85 8.24472 20.0318 8.44722 21.1847 8.96794C22.3664 9.37295 23.404 10.0672 24.384 11.0508C25.3639 12.0923 26.1422 13.2205 26.6033 14.5223C26.978 15.6216 27.1798 16.8077 27.1798 18.1095C27.1798 19.2666 27.0357 20.3081 26.7186 21.2916C26.2575 22.7381 25.4792 24.0399 24.384 25.1392Z"
-                fill={theme.palette.secondary.main}
-            />
-            <text
-                x="45"
-                y="23"
-                fill={wordmarkColor}
-                fontFamily="'Segoe UI', sans-serif"
-                fontSize="16"
-                fontWeight="700"
-                letterSpacing="0.02em"
+        <Box
+            sx={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 1.25,
+                whiteSpace: 'nowrap'
+            }}
+        >
+            <Box
+                sx={{
+                    width: 46,
+                    height: 46,
+                    borderRadius: '16px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    flexShrink: 0,
+                    background: badgeBackground,
+                    border: `1px solid ${alpha(theme.palette.secondary.main, isDark ? 0.3 : 0.18)}`,
+                    boxShadow: isDark
+                        ? `0 14px 28px ${alpha(theme.palette.common.black, 0.26)}`
+                        : `0 14px 28px ${alpha(theme.palette.secondary.main, 0.16)}`
+                }}
             >
-                Job Portal
-            </text>
-        </svg>
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        inset: 0,
+                        background: `radial-gradient(circle at top right, ${alpha(theme.palette.secondary.main, 0.24)} 0%, transparent 58%)`
+                    }}
+                />
+                <Box
+                    component="img"
+                    src={`${process.env.PUBLIC_URL}/favicon.svg`}
+                    alt=""
+                    aria-hidden="true"
+                    sx={{
+                        width: 28,
+                        height: 28,
+                        display: 'block',
+                        position: 'relative',
+                        zIndex: 1
+                    }}
+                />
+            </Box>
+
+            <Box sx={{ display: 'flex', flexDirection: 'column', lineHeight: 1 }}>
+                <Typography
+                    component="span"
+                    sx={{
+                        fontFamily: '"Work Sans", sans-serif',
+                        fontSize: '0.68rem',
+                        fontWeight: 700,
+                        letterSpacing: '0.32em',
+                        textTransform: 'uppercase',
+                        color: textSecondary,
+                        mb: 0.35
+                    }}
+                >
+                    Job
+                </Typography>
+                <Typography
+                    component="span"
+                    sx={{
+                        fontFamily: '"Work Sans", sans-serif',
+                        fontSize: '1rem',
+                        fontWeight: 800,
+                        letterSpacing: '0.18em',
+                        textTransform: 'uppercase',
+                        color: textPrimary
+                    }}
+                >
+                    Portal
+                </Typography>
+            </Box>
+        </Box>
     );
 };
 

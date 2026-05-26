@@ -10,7 +10,12 @@ import Logo from 'ui-component/Logo';
 // ==============================|| MAIN LOGO ||============================== //
 
 const LogoSection = () => (
-    <Link component={RouterLink} to={DASHBOARD_PATH} aria-label="Job Portal">
+    <Link
+        component={RouterLink}
+        to={DASHBOARD_PATH}
+        aria-label="Job Portal"
+        sx={{ display: 'inline-flex', textDecoration: 'none', '&:hover': { textDecoration: 'none' } }}
+    >
         <Logo />
     </Link>
 );
